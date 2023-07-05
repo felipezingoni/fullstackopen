@@ -1,31 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import Header from './components/Header';
 import Content from './components/Content';
 import Total from './components/Total';
 
 const App = () => {
-  const course = 'Half Stack application development';
-  const part1 = 'Fundamentals of React';
-  const exercises1 = 10;
-  const part2 = 'Using props to pass data';
-  const exercises2 = 7;
-  const part3 = 'State of a component';
-  const exercises3 = 14;
-  const totalExercises = exercises1 + exercises2 + exercises3;
+  const course = {
+    name: 'Half Stack application development',
+    parts: [
+      {
+        name: 'Fundamentals of React',
+        exercises: 10
+      },
+      {
+        name: 'Using props to pass data',
+        exercises: 7
+      },
+      {
+        name: 'State of a component',
+        exercises: 14
+      }
+    ]
+  }
 
+  const [counter, setCounter] = useState(0)
+  const totalExercises = course.parts.reduce((total, part) => total + part.exercises, 0);
+  const handleClick = () => setCounter(counter + 1)
   return (
     <div>
-      <Header course={course} />
-      <Content
-        part1={part1}
-        exercises1={exercises1}
-        part2={part2}
-        exercises2={exercises2}
-        part3={part3}
-        exercises3={exercises3}
-      />
-      <Total total={totalExercises}/>
+      <Header course={course.name} />
+      <Content parts={course.parts} />
+      <Total total={totalExercises} />
+      <div>{counter}</div>
+      <button onClick={handleClick}>counter</button>
     </div>
   );
 };

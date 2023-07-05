@@ -1,14 +1,8 @@
 import React, { PureComponent } from 'react'
 
-export class Header extends PureComponent {
-  render() {
-    const {course} = this.props;
-    return (
-      <div>
-        <h1>{course}</h1>
-      </div>
-    )
-  }
+const Header = (props) => {
+  console.log(props)
+  return <h1>{props.course}</h1>
 }
 
 export default Header
